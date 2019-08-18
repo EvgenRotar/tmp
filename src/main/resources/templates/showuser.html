@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/style.css" th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Result Show</h1>
+<p th:text="'id: ' + ${user.userId}" />
+<p th:text="'First_Name: ' + ${user.firstName}" />
+<p th:text="'Last_Name: ' + ${user.lastName}" />
+<p th:text="'Department: ' + ${user.department}" />
+<p th:text="'Job_title: ' + ${user.jobTitle}" />
+<p th:text="'Gender: ' + ${user.gender}" />
+<p th:text="'Data_birth: ' + ${user.dateOfBirth}" />
+<br>
+<br>
+<button id="show" onclick="window.location='/users'"> Show users </button>
+<br>
+<br>
+<a th:href="@{'/updateuser/{id}'(id=${user.userId})}"><button id="update"> Update </button></a>
+<br>
+<br>
+<a th:href="@{'/delete/{id}'(id=${user.userId})}"><button id="delete"> Delete </button></a>
+</body>
+</html>

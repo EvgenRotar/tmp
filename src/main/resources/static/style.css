@@ -1,0 +1,39 @@
+h1 {
+    color: red;
+    text-align: center;
+}
+
+
+table{
+    table-layout: fixed; /* Фиксированная ширина ячеек */
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}.col1 { width: 100px; }
+.coln { width: 60px; }
+
+#tables{
+    table-layout: fixed; /* Фиксированная ширина ячеек */
+    width: 50%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}.col1 { width: 50px; }
+.coln { width: 60px; }
+
+
+td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+}
+th {
+    background: #b0e0e6; /* Цвет фона */
+    text-align: center;
+}
+
+#button{
+    padding: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+p{
+    width: 100px;
+}

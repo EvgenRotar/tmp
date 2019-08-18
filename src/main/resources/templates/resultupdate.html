@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Handing Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/style.css" th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Result Update</h1>
+<p th:text="'id: ' + ${userupdate.userId}" />
+<p th:text="'First_name: ' + ${userupdate.firstName}" />
+<p th:text="'Last_name: ' + ${userupdate.lastName}" />
+<p th:text="'Department: ' + ${userupdate.department}" />
+<p th:text="'Job_title: ' + ${userupdate.jobTitle}" />
+<p th:text="'Gender: ' + ${userupdate.gender}" />
+<p th:text="'Data_birth: ' + ${userupdate.dateOfBirth}" />
+<button id="create" onclick="window.location='/creates'">Create new User</button>
+<br>
+<br>
+<button id="show" onclick="window.location='/users'">Show Users</button>
+</body>
+</html>
