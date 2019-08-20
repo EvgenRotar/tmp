@@ -42,6 +42,20 @@ public class User {
     this.firstName = firstName;
   }
 
+  public User(Long userId, @Size(min = 2, max = 20) String firstName,
+      @Size(min = 2, max = 20) String lastName,
+      @Size(min = 2, max = 20) String department,
+      @Size(min = 2, max = 20) String jobTitle, @NotNull Gender gender,
+      @Past Date dateOfBirth) {
+    this.userId = userId;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.department = department;
+    this.jobTitle = jobTitle;
+    this.gender = gender;
+    this.dateOfBirth = dateOfBirth;
+  }
+
   public static Builder builder() {
     return new Builder();
   }

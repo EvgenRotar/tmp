@@ -2,8 +2,8 @@ package com.mastery.entity;
 
 public enum Gender {
 
-  MALE("male"),
-  FEMALE("female");
+  MALE("MALE"),
+  FEMALE("FEMALE");
 
   private String value;
 

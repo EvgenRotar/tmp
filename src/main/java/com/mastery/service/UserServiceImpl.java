@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mastery.dao.UserDao;
 import com.mastery.entity.User;
-import com.mastery.service.exception.InvalidUserException;
-import com.mastery.validators.UserValidator;
+import com.mastery.exception.InvalidUserException;
+import com.mastery.validator.UserValidator;
 
 @Service
 @Transactional

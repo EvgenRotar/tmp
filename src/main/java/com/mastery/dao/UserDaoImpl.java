@@ -3,8 +3,6 @@ package com.mastery.dao;
 import java.util.List;
 import java.util.Objects;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -14,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mastery.entity.User;
 import com.mastery.mapper.UserMapper;
@@ -26,7 +25,7 @@ public class UserDaoImpl implements UserDao {
   private static final String USER_ID = "userId";
   private static final String FIRST_NAME = "firstName";
   private static final String LAST_NAME = "lastName";
-  private static final String DEPARTMENT_NAME = "departmentName";
+  private static final String DEPARTMENT_NAME = "department";
   private static final String JOB_TITLE = "jobTitle";
   private static final String GENDER = "gender";
   private static final String DATE_OF_BIRTH = "dateOfBirth";
@@ -84,7 +83,7 @@ public class UserDaoImpl implements UserDao {
     namedParameters.addValue(LAST_NAME, user.getLastName());
     namedParameters.addValue(DEPARTMENT_NAME, user.getDepartment());
     namedParameters.addValue(JOB_TITLE, user.getJobTitle());
-    namedParameters.addValue(GENDER, user.getGender());
+    namedParameters.addValue(GENDER, user.getGender().getValue());
     namedParameters.addValue(DATE_OF_BIRTH, user.getDateOfBirth());
 
     jdbcTemplate.update(updateUserSql, namedParameters);

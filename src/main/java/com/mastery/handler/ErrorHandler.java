@@ -1,18 +1,18 @@
-package com.mastery.errorHandlers;
+package com.mastery.handler;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.mastery.service.exception.InvalidUserException;
+import com.mastery.exception.InvalidUserException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(value = {DataAccessException.class})

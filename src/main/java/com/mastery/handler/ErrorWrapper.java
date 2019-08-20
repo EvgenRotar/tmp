@@ -1,4 +1,4 @@
-package com.mastery.errorHandlers;
+package com.mastery.handler;
 
 import org.springframework.http.HttpStatus;
 

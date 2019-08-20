@@ -1,21 +1,30 @@
 package com.mastery.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.mastery.entity.User;
 import com.mastery.service.UserService;
 
-@Controller
+@RestController
+@CrossOrigin
 public class UserController {
-
-  private Long flag_id;
 
   private final UserService userService;
 
@@ -24,56 +33,39 @@ public class UserController {
     this.userService = userService;
   }
 
-  // create new User
-  @RequestMapping(value = "/users/create")
-  public String createForm(Model model) {
-    model.addAttribute("userone", new User());
-    return "creates";
-  }
-
-  @PostMapping(value = "/users")
-  public String createSubmit(@ModelAttribute User user, Model model) {
-    model.addAttribute("userone", user);
-    userService.saveUser(user);
-    return "saveuser";
-  }
-
-  //show List users
   @GetMapping("/users")
-  public String getAllUsers(Model model) {
-    model.addAttribute("users", userService.findAll());
-    return "users";
+  @ResponseStatus(HttpStatus.OK)
+  public List<User> getAllUsers() {
+    return userService.findAll();
   }
 
-  //show User by Id
   @GetMapping("/users/{id}")
-  public String getByUserId(@PathVariable Long id, Model model) {
-    User user = userService.getUserById(id);
-    model.addAttribute("user", user);
-    return "showuser";
+  @ResponseStatus(HttpStatus.OK)
+  public User getUserById(@PathVariable("id") Long id) {
+    return userService.getUserById(id);
   }
 
-  //delete
-  @PostMapping("/users/{id}/delete")
-  public String deleteUser(@PathVariable Long id) {
-    userService.deleteUser(id);
-    return "redirect:/users";
+  @PostMapping("/users")
+  @ResponseStatus(HttpStatus.CREATED)
+  public ResponseEntity<Void> createUser(@Valid @RequestBody User user, UriComponentsBuilder ucBuilder) {
+    Long id = userService.saveUser(user);
+
+    UriComponents uriComponent = ucBuilder.path("/users/{id}").buildAndExpand(id);
+    return ResponseEntity.created(uriComponent.toUri()).build();
   }
 
-  // update
-  @GetMapping(value = "/users/{id}/edit")
-  public String updateForm(@PathVariable Long id, Model model) {
-    model.addAttribute("userupdate", userService.getUserById(id));
-    flag_id = id;
-    return "updateuser";
-  }
+  @PutMapping("/users/{id}")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  public void updateUser(@PathVariable("id") Long id, @Valid @RequestBody User user) {
+    user.setUserId(id);
 
-  @PostMapping(value = "/users/{id}/edit")
-  public String updateSubmit(@ModelAttribute User user, Model model) {
-    user.setUserId(flag_id);
-    model.addAttribute("userupdate", user);
     userService.updateUser(user);
-    return "resultupdate";
+  }
+
+  @DeleteMapping("/users/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public void deleteUser(@PathVariable("id") Long id) {
+    userService.deleteUser(id);
   }
 
 }
